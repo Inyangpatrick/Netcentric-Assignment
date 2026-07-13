@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P3KBooks</title>
+    <style>
+        :root {
+            --primary-color: #111111;
+            --secondary-color: #666666;
+            --background-light: #f9f9f9;
+            --border-color: #e5e5e5;
+            --accent-color: #ff5252;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            color: var(--primary-color);
+            background-color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* Header & Navigation */
+        header {
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--primary-color);
+            margin-left: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Banner Section */
+        .hero {
+            background-color: var(--background-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px 10%;
+            gap: 40px;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .hero-content h4 {
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+
+        .hero-content h1 {
+            font-size: 42px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            border: 1px solid var(--primary-color);
+            transition: 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image img {
+            max-width: 240px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border-radius: 4px;
+        }
+
+        /* Store Features Bar */
+        .features {
+            display: flex;
+            justify-content: space-around;
+            padding: 30px 5%;
+            border-bottom: 1px solid var(--border-color);
+            background: #fff;
+            text-align: center;
+        }
+
+        .feature-item h5 {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .feature-item p {
+            font-size: 12px;
+            color: var(--secondary-color);
+        }
+
+        /* Main Content Grid */
+        .container {
+            padding: 60px 5%;
+        }
+
+        .section-title {
+            font-size: 22px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--primary-color);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .book-card {
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .book-cover-wrapper {
+            background-color: var(--background-light);
+            padding: 25px 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 240px;
+        }
+
+        .book-cover {
+            max-height: 100%;
+            max-width: 100%;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .book-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .book-price {
+            font-size: 14px;
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        /* Bottom Request/Comment Form */
+        .request-section {
+            background-color: var(--background-light);
+            padding: 60px 5%;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .form-container h3 {
+            margin-bottom: 10px;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .form-container p {
+            color: var(--secondary-color);
+            font-size: 13px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .form-group input, 
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, 
+        .form-group textarea:focus {
+            border-color: var(--primary-color);
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        .form-container button:hover {
+            background-color: #333;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            font-size: 12px;
+            color: var(--secondary-color);
+            border-top: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">P3KBooks</div>
+        <nav>
+            <a href="#audiobooks">Audiobooks</a>
+            <a href="#new-arrivals">New Arrivals</a>
+            <a href="#request">Special Requests</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h4>Book Cover Art Sale</h4>
+            <h1>Premade Book Kindle Covers</h1>
+            <p style="margin-bottom: 25px; color: var(--secondary-color);">Find premium design assets and high-quality storytelling formats structured beautifully for modern reads.</p>
+            <a href="#new-arrivals" class="btn">SHOP NOW</a>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&q=80&w=400" alt="Featured Book">
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="feature-item">
+            <h5>Free Shipping</h5>
+            <p>On orders over $100</p>
+        </div>
+        <div class="feature-item">
+            <h5>Support 24/7</h5>
+            <p>Contact us anytime</p>
+        </div>
+        <div class="feature-item">
+            <h5>30 Days Return</h5>
+            <p>Hassle-free exchange</p>
+        </div>
+    </section>
+
+    <main class="container">
+        
+        <h2 id="audiobooks" class="section-title">Audiobooks</h2>
+        <div class="book-grid">
+            <div class="book-card">
+                <div class="book-cover-wrapper">
+                    <img class="book-cover" src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=300" alt="Book">
+                </div>
+                <div class="book-title">The Absolute Best</div>
+                <div class="book-price">$29.00</div>
+            </div>
+            <div class="book-card">
+                <div class="book-cover-wrapper">
+                    <img class="book-cover" src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=300" alt="Book">
+                </div>
+                <div class="book-title">Grandpa & Donuts</div>
+                <div class="book-price">$60.70</div>
+            </div>
+            <div class="book-card">
+                <div class="book-cover-wrapper">
+                    <img class="book-cover" src="https://images.unsplash.com/photo-1614849963640-9cc74b2a826f?auto=format&fit=crop&q=80&w=300" alt="Book">
+                </div>
+                <div class="book-title">Live in a Van</div>
+                <div class="book-price">$35.50</div>
+            </div>
+            <div class="book-card">
+                <div class="book-cover-wrapper">
+                    <img class="book-cover" src="https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&q=80&w=300" alt="Book">
+                </div>
+                <div class="book-title">Creative Minds</div>
+                <div class="book-price">$42.00</div>
+            </div>
+        </div>
+
+        <h2 id="new-arrivals" class="section-title">New Arrivals</h2>
+        <div class="book-grid">
+            <div class="book-card">
+                <div class="book-cover-wrapper">
+                    <img class="book-cover" src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=300" alt="Book">
+                </div>
+                <div class="book-title">Our House Secrets</div>
+                <div class="book-price">$55.10</div>
+            </div>
+            <div class="book-card">
+                <div class="book-cover-wrapper">
+                    <img class="book-cover" src="https://images.unsplash.com/photo-1495640388908-05fa85288e61?auto=format&fit=crop&q=80&w=300" alt="Book">
+                </div>
+                <div class="book-title">Lost Horizons</div>
+                <div class="book-price">$69.30</div>
+            </div>
+            <div class="book-card">
+                <div class="book-cover-wrapper">
+                    <img class="book-cover" src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&q=80&w=300" alt="Book">
+                </div>
+                <div class="book-title">Travel Journal</div>
+                <div class="book-price">$67.90</div>
+            </div>
+            <div class="book-card">
+                <div class="book-cover-wrapper">
+                    <img class="book-cover" src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?auto=format&fit=crop&q=80&w=300" alt="Book">
+                </div>
+                <div class="book-title">The Art of Focus</div>
+                <div class="book-price">$49.99</div>
+            </div>
+        </div>
+
+    </main>
+
+    <section id="request" class="request-section">
+        <div class="form-container">
+            <h3>Contact the Owner</h3>
+            <p>Have a custom order request, special instruction, or general comment? Leave your message below directly to our store manager.</p>
+            
+            <form action="https://formspree.io/f/mwvgkpag" method="POST">
+                <div class="form-group">
+                    <label for="user-name">Your Name</label>
+                    <input type="text" id="user-name" name="name" placeholder="John Doe" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="user-email">Email Address</label>
+                    <input type="email" id="user-email" name="email" placeholder="john@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="owner-message">Comments, Instructions or Requests</label>
+                    <textarea id="owner-message" name="message" rows="5" placeholder="Specify your specific book editions, shipping instructions, or inquiries here..." required></textarea>
+                </div>
+
+                <button type="submit">Submit Request</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 P3KBooks Retail Book Store. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
