@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enhanced Unit Converter</title>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .container {
+        background-color: #fff;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 400px;
+      }
+
+      h1 {
+        margin-bottom: 1rem;
+      }
+
+      .converter {
+        margin-top: 1rem;
+      }
+
+      .selectors {
+        display: flex;
+        justify-content: space-between;
+        margin: 1rem 0;
+      }
+
+      button {
+        background-color: #6200ea;
+        color: white;
+        border: none;
+        padding: 0.75rem;
+        cursor: pointer;
+        border-radius: 5px;
+        width: 100%;
+      }
+
+      button:hover {
+        background-color: #3700b3;
+      }
+
+      #result {
+        margin-top: 1rem;
+        font-size: 1.2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Unit Converter</h1>
+
+      <select id="category" onchange="populateUnits()">
+        <option value="length">Length</option>
+        <option value="weight">Weight</option>
+        <option value="temperature">Temperature</option>
+        <option value="area">Area</option>
+        <option value="volume">Volume</option>
+        <option value="speed">Speed</option>
+        <option value="time">Time</option>
+        <option value="digital">Digital Storage</option>
+      </select>
+
+      <div class="converter">
+        <input type="number" id="inputValue" placeholder="Enter value" />
+
+        <div class="selectors">
+          <select id="fromUnit"></select>
+          <span>to</span>
+          <select id="toUnit"></select>
+        </div>
+
+        <button onclick="convert()">Convert</button>
+
+        <p id="result"></p>
+      </div>
+    </div>
+
+    <script>
+      // Units for various categories
+      const units = {
+        length: {
+          meters: 1,
+          kilometers: 0.001,
+          miles: 0.000621371,
+          feet: 3.28084,
+          inches: 39.3701,
+        },
+        weight: {
+          grams: 1,
+          kilograms: 0.001,
+          pounds: 0.00220462,
+          ounces: 0.035274,
+        },
+        temperature: { celsius: 1, fahrenheit: 33.8, kelvin: 274.15 },
+        area: {
+          squareMeters: 1,
+          acres: 0.000247105,
+          squareMiles: 3.861e-7,
+          hectares: 0.0001,
+        },
+        volume: {
+          liters: 1,
+          gallons: 0.264172,
+          cups: 4.22675,
+          milliliters: 1000,
+        },
+        speed: { "m/s": 1, "km/h": 3.6, mph: 2.23694, "ft/s": 3.28084 },
+        time: { seconds: 1, minutes: 1 / 60, hours: 1 / 3600, days: 1 / 86400 },
+        digital: {
+          bytes: 1,
+          kilobytes: 0.001,
+          megabytes: 1e-6,
+          gigabytes: 1e-9,
+        },
+      };
+
+      // Populate the unit dropdowns based on selected category
+      function populateUnits() {
+        const category = document.getElementById("category").value;
+        const fromUnit = document.getElementById("fromUnit");
+        const toUnit = document.getElementById("toUnit");
+
+        fromUnit.innerHTML = "";
+        toUnit.innerHTML = "";
+
+        Object.keys(units[category]).forEach((unit) => {
+          const option1 = new Option(unit, unit);
+          const option2 = new Option(unit, unit);
+          fromUnit.add(option1);
+          toUnit.add(option2);
+        });
+      }
+
+      // Conversion logic
+      function convert() {
+        const category = document.getElementById("category").value;
+        const value = parseFloat(document.getElementById("inputValue").value);
+        const fromUnit = document.getElementById("fromUnit").value;
+        const toUnit = document.getElementById("toUnit").value;
+        const resultElement = document.getElementById("result");
+
+        if (isNaN(value)) {
+          resultElement.textContent = "Please enter a valid number.";
+          return;
+        }
+
+        let result;
+        if (category === "temperature") {
+          if (fromUnit === "celsius" && toUnit === "fahrenheit") {
+            result = (value * 9) / 5 + 32;
+          } else if (fromUnit === "fahrenheit" && toUnit === "celsius") {
+            result = ((value - 32) * 5) / 9;
+          } else if (fromUnit === "celsius" && toUnit === "kelvin") {
+            result = value + 273.15;
+          } else if (fromUnit === "kelvin" && toUnit === "celsius") {
+            result = value - 273.15;
+          } else {
+            result = value;
+          }
+        } else {
+          result =
+            (value / units[category][fromUnit]) * units[category][toUnit];
+        }
+
+        resultElement.textContent = `${value} ${fromUnit} = ${result.toFixed(4)} ${toUnit}`;
+      }
+
+      // Initialize the converter with default values
+      window.onload = () => {
+        populateUnits();
+      };
+    </script>
+  </body>
+</html>
